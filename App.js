@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   TextInput,
   Button,
+  Platform,
 } from "react-native";
 import { useState } from "react";
 
@@ -45,6 +46,10 @@ export default function App() {
       `Seu imc é de ${imc}, por isso está em situação de ${result}.`
     );
   };
+
+  let tipoTeclado =
+    Platform.OS === "android" ? "numeric" : "numbers-and-punctuation";
+
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
@@ -65,7 +70,7 @@ export default function App() {
           <View style={styles.linha2}>
             <TextInput
               placeholder="Peso (Ex: 80)"
-              keyboardType="numeric-pad"
+              keyboardType={tipoTeclado}
               style={styles.campoLinha2}
               onChangeText={pesoDigitado}
               value={peso}
@@ -73,7 +78,7 @@ export default function App() {
             <TextInput
               placeholder="Altura (Ex: 1.75)"
               style={styles.campoLinha2}
-              keyboardType="decimal-pad"
+              keyboardType={tipoTeclado}
               onChangeText={alturaDigitada}
               value={altura}
             />
